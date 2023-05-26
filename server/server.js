@@ -38,4 +38,4 @@ else
 
 app.use(notFound);
 app.use(errorHandler);
-app.listen(port, () => console.log(`server started on port ${port}`));
+app.listen(port);
