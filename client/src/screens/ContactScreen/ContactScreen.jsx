@@ -30,7 +30,7 @@ const ContactScreen = () => {
                </a>
             </Col>
             <Col >
-            <a href="https://twitter.com/bgde2001" target="_blank" className = "connect">
+            <a href="https://twitter.com/CineScope420" target="_blank" className = "connect">
                <img
                src='twitter.svg'
                alt= 'instagram icon'
