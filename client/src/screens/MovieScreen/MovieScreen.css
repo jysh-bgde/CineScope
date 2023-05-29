@@ -6,14 +6,21 @@ body
 
 .movieScreen
 {
-    /* background-color: #212529; */
+    
     color: white;
     height: 10vh;
     position: sticky;
     top: 0;
-    z-index: 999;
+    z-index: 99;
 
 }
+.movieInput
+{
+    border-radius: 0.5rem;
+    width: 100%;
+}
+
+
 
 .cardContainer
 {   height: 100%;
