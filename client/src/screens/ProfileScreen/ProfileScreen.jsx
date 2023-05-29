@@ -9,7 +9,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import { useUpdateUserMutation } from '../../slices/usersApiSlice';
 import { setCredentials } from '../../slices/authSlice';
 import Header from '../../components/Header';
-
+import movieTitles from '../MovieScreen/utils';
 
 
 const ProfileScreen = () => {
@@ -22,6 +22,8 @@ const ProfileScreen = () => {
         movie1: "",
         movie2: ""
     })
+
+    const [movieTitlesList, setMovieTitlesList] = useState(movieTitles)
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -110,42 +112,83 @@ const ProfileScreen = () => {
                 </Form.Group>
                 <Form.Group className='my-2' >
                     <Form.Label>Your top three movies</Form.Label>
-                    <Form.Control 
-                    key='movie0'
-                    className='mt-2' 
-                      type = 'text'
+                    <input 
+                    list='movie0'
+                    name='movie0'
+                    className='mt-2 movieinput' 
+                      
+                      autoComplete='on'
                         placeholder='Enter movie name'
                         value={movies.movie0}
                         onChange={(e) => setMovies({
                             movie0: e.target.value,
                             movie1: movies.movie1,
                             movie2: movies.movie2
-                            })}>
-                    </Form.Control>
-                    <Form.Control 
-                    key="movie1"
-                    className='mt-2'
-                      type = 'text'
+                            })}/>
+                    
+             <datalist id="movie0" className='movieTitlesList'>
+              
+              {
+               movieTitlesList.map((movie,index) => {
+                return (
+                  <option value={movie} key={index} />
+                )
+               })
+              }
+              
+    </datalist>
+                    <input
+                    list = "movie1"
+                    name = "movie1"
+                    key = "movie1"
+                    className='mt-2 movieinput'
+                     autoComplete='on'
                         placeholder='Enter movie name'
                         value={movies.movie1}
                         onChange={(e) => setMovies({
                             movie0: movies.movie0,
                             movie1: e.target.value,
                             movie2: movies.movie2
-                            })}>
-                    </Form.Control>
-                    <Form.Control 
-                    key="movie2"
-                    className='mt-2' 
-                      type = 'text'
+                            })} />
+                                    
+             <datalist id="movie1" className='movieTitlesList'>
+              
+              {
+               movieTitlesList.map((movie,index) => {
+                return (
+                  <option value={movie} key={index} />
+                )
+               })
+              }
+              
+    </datalist>
+                    <input
+                    list = "movie2"
+                    name = "movie2"
+                    key = "movie2"
+                    className='mt-2 movieinput'
+                     autoComplete='on'
                         placeholder='Enter movie name'
                         value={movies.movie2}
                         onChange={(e) => setMovies({
-                            movie2: e.target.value,
+                            movie0: movies.movie0,
                             movie1: movies.movie1,
-                            movie0: movies.movie0
-                            })}>
-                    </Form.Control>
+                            movie2: e.target.value,
+                            })}/>
+                                    
+             <datalist id="movie2" className='movieTitlesList'>
+              
+              {
+               movieTitlesList.map((movie,index) => {
+                return (
+                  <option value={movie} key={index} />
+                )
+               })
+              }
+              
+    </datalist>
+                    
+                    
                 </Form.Group>
                       
                 <Button type='submit' variant = 'success' className='m-2'>

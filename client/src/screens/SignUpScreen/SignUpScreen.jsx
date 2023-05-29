@@ -9,6 +9,8 @@ import Loader from '../../components/Loader';
 import {useSelector, useDispatch} from 'react-redux'
 import { useSignUpMutation } from '../../slices/usersApiSlice';
 import { setCredentials } from '../../slices/authSlice';
+import movieTitles from '../MovieScreen/utils';
+import "./SignUpScreen.css"
 
 const SignUpScreen = () => {
 
@@ -16,6 +18,8 @@ const SignUpScreen = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [movieTitlesList, setMovieTitlesList] = useState(movieTitles)
+    
     const [movies, setMovies] = useState({
         movie0 : "",
         movie1: "",
@@ -27,6 +31,7 @@ const SignUpScreen = () => {
 
     const [signUp, {isLoading }] = useSignUpMutation();
 
+    
    
 
 
@@ -52,7 +57,7 @@ const SignUpScreen = () => {
 
     }
     return (
-        <FormContainer>
+        <FormContainer className="signUpScreen">
             <h1>Sign Up</h1>
             <Form onSubmit={submitHandler}>
                 <Form.Group className='my-2' controlId='name'>
@@ -93,42 +98,83 @@ const SignUpScreen = () => {
                 </Form.Group>
                 <Form.Group className='my-2' >
                     <Form.Label>Your top three movies</Form.Label>
-                    <Form.Control 
-                    key = "movie0"
-                    className='mt-2' 
-                      type = 'text'
+                    <input 
+                    list='movie0'
+                    name='movie0'
+                    className='mt-2 movieinput' 
+                      
+                      autoComplete='on'
                         placeholder='Enter movie name'
                         value={movies.movie0}
                         onChange={(e) => setMovies({
                             movie0: e.target.value,
                             movie1: movies.movie1,
                             movie2: movies.movie2
-                            })}>
-                    </Form.Control>
-                    <Form.Control 
+                            })}/>
+                    
+             <datalist id="movie0" className='movieTitlesList'>
+              
+              {
+               movieTitlesList.map((movie,index) => {
+                return (
+                  <option value={movie} key={index} />
+                )
+               })
+              }
+              
+    </datalist>
+                    <input
+                    list = "movie1"
+                    name = "movie1"
                     key = "movie1"
-                    className='mt-2'
-                      type = 'text'
+                    className='mt-2 movieinput'
+                     autoComplete='on'
                         placeholder='Enter movie name'
                         value={movies.movie1}
                         onChange={(e) => setMovies({
                             movie0: movies.movie0,
                             movie1: e.target.value,
                             movie2: movies.movie2
-                            })}>
-                    </Form.Control>
-                    <Form.Control 
+                            })} />
+                                    
+             <datalist id="movie1" className='movieTitlesList'>
+              
+              {
+               movieTitlesList.map((movie,index) => {
+                return (
+                  <option value={movie} key={index} />
+                )
+               })
+              }
+              
+    </datalist>
+                    <input
+                    list = "movie2"
+                    name = "movie2"
                     key = "movie2"
-                    className='mt-2' 
-                      type = 'text'
+                    className='mt-2 movieinput'
+                     autoComplete='on'
                         placeholder='Enter movie name'
                         value={movies.movie2}
                         onChange={(e) => setMovies({
                             movie0: movies.movie0,
                             movie1: movies.movie1,
                             movie2: e.target.value,
-                            })}>
-                    </Form.Control>
+                            })}/>
+                                    
+             <datalist id="movie2" className='movieTitlesList'>
+              
+              {
+               movieTitlesList.map((movie,index) => {
+                return (
+                  <option value={movie} key={index} />
+                )
+               })
+              }
+              
+    </datalist>
+                    
+                    
                 </Form.Group>
                             {isLoading && <Loader/>}
                 <Button type='submit' variant = 'success' className='m-2'>

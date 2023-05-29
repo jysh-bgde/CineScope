@@ -6,19 +6,28 @@ import Cards from '../../components/Cards'
 import { toast } from 'react-toastify'
 import { client } from "@gradio/client";
 import movieTitles from './utils'
+import { useSelector } from 'react-redux'
 
 
 
 const MovieScreen = () => {
   
+ 
   const endpoint = "https://jyshbgde-cinescope.hf.space";
   
-  const [movie, setMovie] = useState("")
+  const [movie, setMovie] = useState( "" )
 
   const [recommendations, setReccomendations] = useState("")
   
   const [movieTitlesList, setMovieTitlesList] = useState(movieTitles)
   
+  
+ 
+
+
+
+
+
 
  
   const submitHandler = async (e) => {
