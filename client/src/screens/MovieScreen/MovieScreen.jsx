@@ -12,18 +12,84 @@ import { useSelector } from 'react-redux'
 
 const MovieScreen = () => {
   
+  const {userInfo} = useSelector((state) => state.auth);
  
   const endpoint = "https://jyshbgde-cinescope.hf.space";
   
   const [movie, setMovie] = useState( "" )
 
-  const [recommendations, setReccomendations] = useState("")
+  const [recommendations, setReccomendations] = useState([])
   
   const [movieTitlesList, setMovieTitlesList] = useState(movieTitles)
   
-  
  
+ 
+  useEffect(() => {
+   
+    async function fetchRecommendations()
+    {
+      const app = await client(endpoint);
+      var result0 = await app.predict("/predict", [userInfo.movies['movie0']]);
+      result0 = result0.data[0]
+      var result1 = await app.predict("/predict", [userInfo.movies['movie1']]);
+      result1 = result1.data[0]
+      var result2 = await app.predict("/predict", [userInfo.movies['movie2']]);
+      result2 = result2.data[0]
+     
+   
 
+  for (let i = 0; i < result0.length; i++) {
+    
+    if(result0[i][0] == "Check movie name again")
+    {
+      result0.splice(i, 1);
+    }
+    
+    
+  }
+  for (let i = 0; i < result1.length; i++) {
+    
+    if(result1[i][0] == "Check movie name again")
+    {
+      result1.splice(i, 1);
+    }
+    
+    
+  }
+  for (let i = 0; i < result2.length; i++) {
+    
+    if(result2[i][0] == "Check movie name again")
+    {
+      result2.splice(i, 1);
+    }
+    
+    
+  }
+   
+  var results = []
+      
+  results = result0.concat(result1, result2)
+
+  let uniqueArray = Array.from(new Set(results.map(JSON.stringify)), JSON.parse);
+
+  setReccomendations(uniqueArray)
+    
+    
+    
+   
+   
+ 
+      
+     
+    } 
+    
+    fetchRecommendations()
+
+     
+    
+    
+  }, [])
+  
 
 
 
