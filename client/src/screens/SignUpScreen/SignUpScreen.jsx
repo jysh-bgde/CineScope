@@ -11,15 +11,64 @@ import { useSignUpMutation } from '../../slices/usersApiSlice';
 import { setCredentials } from '../../slices/authSlice';
 import movieTitles from '../MovieScreen/utils';
 import "./SignUpScreen.css"
+import FormInput from '../../components/FormInput';
 
 const SignUpScreen = () => {
+    const [values, setValues] = useState(
+        {
+            name: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+           
+        }
+    )
 
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
+    const inputs = [
+        {
+            id:1,
+            name: "name",
+            type : "text",
+            placeholder: "Name",
+            errorMessage:"Name should be 3-12 characters long and shouldn't include any special character",
+            label: "Name",
+            pattern: '[A-Za-z0-9]{3,16}$',
+            required : true,
+        },
+        {
+            id:2,
+            name: "email",
+            type : "email",
+            placeholder: "Email",
+            errorMessage:"It should be a valid email",
+            label: "Email",
+            required : true,
+        },
+        {
+            id:3,
+            name: "password",
+            type : "password",
+            placeholder: "Password",
+            pattern: '[A-Za-z0-9]{8,16}$',
+            errorMessage:"Password should be minimum 8 characters",
+            label: "Password",
+            required : true,
+        },
+        {
+            id:4,
+            name: "confirmPassword",
+            type : "password",
+            placeholder: "Confirm Password",
+            pattern : values.password,
+            errorMessage:"Passwords don't match",
+            label: "Confirm Password",
+            required : true,
+        }
+    ]
+
+
     const [movieTitlesList, setMovieTitlesList] = useState(movieTitles)
-    
+  
     const [movies, setMovies] = useState({
         movie0 : "",
         movie1: "",
@@ -31,13 +80,12 @@ const SignUpScreen = () => {
 
     const [signUp, {isLoading }] = useSignUpMutation();
 
-    
-   
-
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        if(password !== confirmPassword)
+
+      
+        if(values.password !== values.confirmPassword)
         {
             toast.error('Passwords do not match')
 
@@ -46,7 +94,7 @@ const SignUpScreen = () => {
         {
             try 
             {
-                const res = await signUp({name, email,password,movies}).unwrap();
+                const res = await signUp({name: values.name, email: values.email, password : values.password,movies : movies}).unwrap();
                 dispatch(setCredentials({...res}))
                 navigate('/login')           
             } catch (error) 
@@ -56,46 +104,31 @@ const SignUpScreen = () => {
         }
 
     }
+
+    const onChange = (e) => {
+        setValues({
+            ...values,
+            [e.target.name]: e.target.value
+        })
+    }
+
+
     return (
+        <>
         <FormContainer className="signUpScreen">
-            <h1>Sign Up</h1>
+            <h1 style = {{color:'white'}}>Sign Up</h1>
             <Form onSubmit={submitHandler}>
-                <Form.Group className='my-2' controlId='name'>
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control
-                       type = 'text'
-                        placeholder='Enter name'
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}>
-                    </Form.Control>
-                </Form.Group>
-                <Form.Group className='my-2' controlId='email'>
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                        type='text'
-                        placeholder='Enter email'
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}>
-                    </Form.Control>
-                </Form.Group>
-                <Form.Group className='my-2' controlId='password'>
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                        type='password'
-                        placeholder='Enter password'
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}>
-                    </Form.Control>
-                </Form.Group>
-                <Form.Group className='my-2' controlId='confirmPassword'>
-                    <Form.Label>Confirm Password</Form.Label>
-                    <Form.Control
-                        type='password'
-                        placeholder='Enter password again'
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}>
-                    </Form.Control>
-                </Form.Group>
+                {
+                inputs.map((input) => (
+                    <FormInput 
+                    key={input.id} 
+                    label = {input.label}
+                    {...input}
+                     value = {values[input.name]} 
+                     onChange={onChange}
+                     />
+                ))}
+             
                 <Form.Group className='my-2' >
                     <Form.Label>Your top three movies</Form.Label>
                     <input 
@@ -182,12 +215,13 @@ const SignUpScreen = () => {
                 </Button>
 
                 <Row className = 'py-3'>
-                    <Col>
+                    <Col style = {{color: 'white'}}>
                     Already have an account? <Link to ="/login">Log in</Link>
                     </Col>
                 </Row>
             </Form>
         </FormContainer>
+        </>
     )
 }
 

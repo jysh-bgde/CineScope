@@ -10,17 +10,67 @@ import { useUpdateUserMutation } from '../../slices/usersApiSlice';
 import { setCredentials } from '../../slices/authSlice';
 import Header from '../../components/Header';
 import movieTitles from '../MovieScreen/utils';
+import FormInput from '../../components/FormInput';
 
 
 const ProfileScreen = () => {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
+    const {userInfo} = useSelector((state) => state.auth);
+
+    const [values, setValues] = useState(
+        {
+            name: userInfo.name,
+            email: userInfo.email,
+            password: "",
+            confirmPassword: "",
+           
+        }
+    )
+
+    const inputs = [
+        {
+            id:1,
+            name: "name",
+            type : "text",
+            placeholder: "Name",
+            errorMessage:"Name should be 3-16 characters long and shouldn't include any special character",
+            label: "Name",
+            pattern: '[A-Za-z0-9]{3,16}$',
+            required : true,
+        },
+        {
+            id:2,
+            name: "email",
+            type : "email",
+            placeholder: "Email",
+            errorMessage:"It should be a valid email",
+            label: "Email",
+            required : true,
+        },
+        {
+            id:3,
+            name: "password",
+            type : "password",
+            placeholder: "Password",
+            pattern: '[A-Za-z0-9]{8,16}$',
+            errorMessage:"Password should be 8-16 characters long",
+            label: "Password",
+            required : true,
+        },
+        {
+            id:4,
+            name: "confirmPassword",
+            type : "password",
+            placeholder: "Confirm Password",
+            pattern : values.password,
+            errorMessage:"Passwords don't match",
+            label: "Confirm Password",
+            required : true,
+        }
+    ]
     const [movies, setMovies] = useState({
-        movie0 : "",
-        movie1: "",
-        movie2: ""
+        movie0 : userInfo.movies['movie0'],
+        movie1: userInfo.movies['movie1'],
+        movie2: userInfo.movies['movie2']
     })
 
     const [movieTitlesList, setMovieTitlesList] = useState(movieTitles)
@@ -28,20 +78,22 @@ const ProfileScreen = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const {userInfo} = useSelector((state) => state.auth);
     const [updateProfile, {isLoading}] = useUpdateUserMutation();
 
-    useEffect(()=> {
-        setName(userInfo.name)
-        setEmail(userInfo.email)
-        setMovies(userInfo.movies)
-    }, [userInfo.email, userInfo.name, userInfo.movies]);
+  
+
+    const onChange = (e) => {
+        setValues({
+            ...values,
+            [e.target.name]: e.target.value
+        })
+    }
 
 
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        if(password !== confirmPassword)
+        if(values.password !== values.confirmPassword)
         {
             toast.error('Passwords do not match')
 
@@ -51,13 +103,14 @@ const ProfileScreen = () => {
             try {
                 const res = await updateProfile({
                     _id: userInfo._id,
-                    name,
-                    email,
-                    password,
-                    movies,
+                    name: values.name,
+                    email: values.email,
+                    password: values.password,
+                    movies: movies,
                 }).unwrap()
 
                 dispatch(setCredentials({...res}))
+                navigate('/profile') 
                 toast.success('Profile Update');
             } catch (err) {
                 toast.error(err?.data?.message || err?.error)
@@ -74,42 +127,17 @@ const ProfileScreen = () => {
         <FormContainer>
             <h1>Update Profile</h1>
             <Form onSubmit={submitHandler}>
-                <Form.Group className='my-2' controlId='name' >
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control
-                       type = 'text'
-                        placeholder='Enter name'
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}>
-                    </Form.Control>
-                </Form.Group>
-                <Form.Group className='my-2' controlId='email'>
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                        type='text'
-                        placeholder='Enter email'
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}>
-                    </Form.Control>
-                </Form.Group>
-                <Form.Group className='my-2' controlId='password'>
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                        type='password'
-                        placeholder='Enter password'
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}>
-                    </Form.Control>
-                </Form.Group>
-                <Form.Group className='my-2' controlId='confirmPassword'>
-                    <Form.Label>Confirm Password</Form.Label>
-                    <Form.Control
-                        type='password'
-                        placeholder='Enter password again'
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}>
-                    </Form.Control>
-                </Form.Group>
+            {
+                inputs.map((input) => (
+                    <FormInput
+                    key={input.id} 
+                    label = {input.label}
+                    {...input}
+                     value = {values[input.name]} 
+                     onChange={onChange}
+                     />
+                ))}
+              
                 <Form.Group className='my-2' >
                     <Form.Label>Your top three movies</Form.Label>
                     <input 
