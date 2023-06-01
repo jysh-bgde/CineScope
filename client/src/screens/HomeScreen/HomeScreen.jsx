@@ -1,12 +1,41 @@
-import React from 'react';
-import { Container, Card, Button, Row, Col, Stack } from 'react-bootstrap';
+import React, {useState} from 'react';
+import { Container, Card, Button, Row, Col, Stack, Form } from 'react-bootstrap';
 import '../HomeScreen/HomeScreen.css'
 import { LinkContainer } from 'react-router-bootstrap';
+import Header from '../../components/Header'
+import movieTitles from '../MovieScreen/utils'
+import Cards from '../../components/Cards'
+import { client } from "@gradio/client";
+import Search from '../../components/Search';
+
+
 const HomeScreen = () => {
+  
+  const [movie, setMovie] = useState( "" )
+
+  const [recommendations, setReccomendations] = useState([])
+  
+  const [movieTitlesList, setMovieTitlesList] = useState(movieTitles)
+
+  const endpoint = "https://jyshbgde-cinescope.hf.space";
+
+  
+
+  const submitHandler = async (e) => {
+    
+    e.preventDefault()
+  
+    const app = await client(endpoint);
+    const result = await app.predict("/predict", [movie]);
+      setReccomendations(result.data[0])
+  }
+        
+  
+  
+  
   return (
-
-
-
+    <>
+    <Header/>
     <Container className='hero' fluid >
       <Container>
       <Row >
@@ -40,8 +69,8 @@ const HomeScreen = () => {
 
     </Container>
     </Container>
-
-
+    <Search/>
+    </>
   )
 }
 

@@ -7,6 +7,7 @@ import { toast } from 'react-toastify'
 import { client } from "@gradio/client";
 import movieTitles from './utils'
 import { useSelector } from 'react-redux'
+import Search from '../../components/Search'
 
 
 
@@ -120,7 +121,8 @@ const MovieScreen = () => {
     <>
  
     <Header/>
-    <Container fluid className='pt-2 movieScreen' >
+    <Search profileRecommendations={recommendations}/>
+    {/* <Container fluid className='pt-2 movieScreen' >
         <Row>
             <Col>
             <Form className="d-flex" onSubmit={submitHandler}>
@@ -162,7 +164,7 @@ const MovieScreen = () => {
     <Container fluid className='cardContainer'>
 
     <Cards recommendations = {recommendations}/>
-    </Container>
+    </Container> */}
  
     </>
   )
