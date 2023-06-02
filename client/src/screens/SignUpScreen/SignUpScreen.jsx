@@ -12,6 +12,7 @@ import { setCredentials } from '../../slices/authSlice';
 import movieTitles from '../MovieScreen/utils';
 import "./SignUpScreen.css"
 import FormInput from '../../components/FormInput';
+import Header from '../../components/Header';
 
 const SignUpScreen = () => {
     const [values, setValues] = useState(
@@ -115,6 +116,7 @@ const SignUpScreen = () => {
 
     return (
         <>
+        <Header/>
         <FormContainer className="signUpScreen">
             <h1 style = {{color:'white'}}>Sign Up</h1>
             <Form onSubmit={submitHandler}>

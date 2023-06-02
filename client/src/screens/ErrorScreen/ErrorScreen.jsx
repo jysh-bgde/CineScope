@@ -2,9 +2,12 @@ import React from 'react'
 import { Row, Col, Container } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap';
 import './ErrorScreen.css'
+import Header from '../../components/Header';
 
 const ErrorScreen = () => {
   return (
+    <>
+    <Header/>
     <Container fluid className='errorScreen'>
         <Row>
             <Col>
@@ -17,6 +20,7 @@ const ErrorScreen = () => {
             </Col>
         </Row>
     </Container>
+    </>
   )
 }
 

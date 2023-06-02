@@ -9,6 +9,7 @@ import { useLoginMutation } from '../../slices/usersApiSlice';
 import {setCredentials} from '../../slices/authSlice';
 import {toast} from 'react-toastify'
 import Loader from '../../components/Loader';
+import Header from '../../components/Header';
 
 const LoginScreen = () => {
 
@@ -41,6 +42,9 @@ const LoginScreen = () => {
        }
     }
     return (
+        <>
+        <Header/>
+        
         <FormContainer>
             <h1>Sign In</h1>
             <Form onSubmit={submitHandler}>
@@ -74,6 +78,7 @@ const LoginScreen = () => {
                 </Row>
             </Form>
         </FormContainer>
+        </>
     )
 }
 
