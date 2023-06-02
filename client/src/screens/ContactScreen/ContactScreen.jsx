@@ -22,7 +22,7 @@ const ContactScreen = () => {
         </Row>
         <Row  >
             <Col >
-               <a target="_blank" href="https://www.instagram.com/jayeshbagde/" className = "connect" >
+               <a target="_blank" href="https://www.instagram.com/jayeshbagde/" className = "instagramConnect connect" >
                <img
                src='insta.svg'
                alt= 'instagram icon'
@@ -30,7 +30,7 @@ const ContactScreen = () => {
                </a>
             </Col>
             <Col >
-            <a href="https://twitter.com/CineScope420" target="_blank" className = "connect">
+            <a href="https://twitter.com/CineScope420" target="_blank" className = "twitterConnect connect">
                <img
                src='twitter.svg'
                alt= 'twitter icon'

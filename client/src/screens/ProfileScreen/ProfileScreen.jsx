@@ -219,7 +219,7 @@ const ProfileScreen = () => {
                     
                 </Form.Group>
                       
-                <Button type='submit' variant = 'success' className='m-2'>
+                <Button type='submit' variant = 'one' className='m-2'>
                 Update 
                 </Button>
 

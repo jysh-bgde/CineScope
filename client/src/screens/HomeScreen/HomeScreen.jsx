@@ -35,12 +35,15 @@ const HomeScreen = () => {
   
   return (
     <>
+
+
+
     <Header/>
     <Container className='hero' fluid >
       <Container>
       <Row >
         <Col>
-          <h1>
+          <h1 style={{color: "#ff6f00", fontWeight: "bold"}}>
             Discover Your Next Movie Masterpiece
           </h1>
         </Col>
@@ -56,12 +59,12 @@ const HomeScreen = () => {
         <Col>
         <LinkContainer to="/login" >
           <span >
-          <Button variant="success"  >Log In</Button>
+          <Button variant="one" >Log In</Button>
           </span>
           </LinkContainer>
           <LinkContainer to="/signup" >
           <span >
-          <Button variant="success" className='m-2'>Sign Up</Button>
+          <Button variant="two" className='m-2'>Sign Up</Button>
           </span>
           </LinkContainer>
         </Col>

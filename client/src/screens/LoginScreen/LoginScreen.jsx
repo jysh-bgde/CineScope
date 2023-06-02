@@ -67,13 +67,13 @@ const LoginScreen = () => {
                     </Form.Control>
                 </Form.Group>
                 {isLoading && <h2>loading..</h2>}
-                <Button type='submit' variant = 'success' className='m-2'>
+                <Button type='submit' variant = 'one' className='m-2'>
                     Log In
                 </Button>
 
                 <Row className = 'py-3'>
                     <Col>
-                    New user? <Link to ="/signup">Sign Up</Link>
+                    New user? <Link to ="/signup" style={{color: "#ff6f00", textDecoration:"none"}}>Sign Up</Link>
                     </Col>
                 </Row>
             </Form>

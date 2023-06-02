@@ -212,13 +212,13 @@ const SignUpScreen = () => {
                     
                 </Form.Group>
                             {isLoading && <Loader/>}
-                <Button type='submit' variant = 'success' className='m-2'>
+                <Button type='submit' variant = 'one' className='m-2'>
                     Sign Up
                 </Button>
 
                 <Row className = 'py-3'>
                     <Col style = {{color: 'white'}}>
-                    Already have an account? <Link to ="/login">Log in</Link>
+                    Already have an account? <Link to ="/login" style={{color: "#ff6f00", textDecoration:"none"}}>Log in</Link>
                     </Col>
                 </Row>
             </Form>

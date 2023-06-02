@@ -54,7 +54,7 @@ const Search = (props) => {
       }
       
 </datalist>
-        <Button type='submit' variant="outline-light">Search</Button>
+        <Button type='submit' variant="one">Search</Button>
       </Form>
         </Col>
     </Row>

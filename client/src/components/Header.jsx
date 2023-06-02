@@ -22,11 +22,44 @@ const Header = () => {
     }
   }
   return (
+    <>
+
+    <style type = "text/css">
+      {`
+      .navbar-brand
+      {
+        color: #ff6f00;
+        font-weight: bold
+      }
+
+      .btn-one {
+        background-color: #ff6f00;
+        color: #f9f7f8;
+       
+      }
+      .btn-two {
+        background-color: #f9f7f8 ;
+        color: #ff6f00;
+      
+      }
+      .card-header{
+        color: #ff6f00;
+        font-weight: bold;
+        border-bottom: 1px solid rgb(255 255 255 / 82%);
+      }
+      .nav-link
+      {
+        color: white
+      }
+      `}
+    </style>
+
+
     <header className='header'>
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar collapseOnSelect expand="lg" bg="dark" variant='dark'>
         <Container>
           <LinkContainer to='/movies'>
-            <Navbar.Brand >CineScope</Navbar.Brand>
+            <Navbar.Brand className='logo' >CineScope</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
@@ -69,6 +102,7 @@ const Header = () => {
         </Container>
       </Navbar>
     </header>
+    </>
   )
 }
 

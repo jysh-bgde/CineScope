@@ -50,10 +50,10 @@ const AboutScreen = () => {
                         <h1> Features and Benefits</h1>
                        
                         <ListGroup >
-      <ListGroup.Item variant = "dark"><span style={{fontWeight: "bold"}}>Personalized Recommendations:</span> Discover movies tailored to your specific preferences, ensuring that every film you watch is a delightful experience.</ListGroup.Item>
-      <ListGroup.Item variant = "dark"> <span style={{fontWeight: "bold"}}>Extensive Movie Library: </span>Explore a vast collection of movies spanning various genres, decades, and languages, including hidden gems and timeless classics.</ListGroup.Item>
-      <ListGroup.Item variant = "dark"> <span style={{fontWeight: "bold"}}>User Community:</span> Connect with a thriving community of film enthusiasts, share recommendations, and engage in lively discussions about your favorite movies.</ListGroup.Item>
-      <ListGroup.Item variant = "dark"> <span style={{fontWeight: "bold"}}>Watchlist and Ratings: </span> Create a personal watchlist to keep track of movies you want to watch, and rate films to help improve future recommendations.</ListGroup.Item>
+      <ListGroup.Item variant = "light"><span style={{fontWeight: "bold", color: "#ff6f00" }}>Personalized Recommendations:</span> Discover movies tailored to your specific preferences, ensuring that every film you watch is a delightful experience.</ListGroup.Item>
+      <ListGroup.Item variant = "light"> <span style={{fontWeight: "bold", color: "#ff6f00" }}>Extensive Movie Library: </span>Explore a vast collection of movies spanning various genres, decades, and languages, including hidden gems and timeless classics.</ListGroup.Item>
+      <ListGroup.Item variant = "light"> <span style={{fontWeight: "bold", color: "#ff6f00" }}>User Community:</span> Connect with a thriving community of film enthusiasts, share recommendations, and engage in lively discussions about your favorite movies.</ListGroup.Item>
+      <ListGroup.Item variant = "light"> <span style={{fontWeight: "bold", color: "#ff6f00" }}>Watchlist and Ratings: </span> Create a personal watchlist to keep track of movies you want to watch, and rate films to help improve future recommendations.</ListGroup.Item>
  
     </ListGroup>
                     </Col>
@@ -62,7 +62,7 @@ const AboutScreen = () => {
                     <Col>
                         <h1> Join CineScope Today</h1>
                         <p>
-                        We invite you to <Link to = '/signup'><span style = {{fontWeight: "bold"}}>JOIN </span></Link> our ever-growing community of movie lovers and unlock a world of cinematic wonders with CineScope. Whether you're seeking a heartwarming drama, an adrenaline-pumping action flick, or an intellectually stimulating indie film, we have something for everyone. Start your personalized movie journey today and experience the magic of CineScope.
+                        We invite you to <Link to = '/signup' style = {{textDecoration: "none"}}><span style = {{fontWeight: "bold", color: "#ff6f00"}}>JOIN </span></Link> our ever-growing community of movie lovers and unlock a world of cinematic wonders with CineScope. Whether you're seeking a heartwarming drama, an adrenaline-pumping action flick, or an intellectually stimulating indie film, we have something for everyone. Start your personalized movie journey today and experience the magic of CineScope.
                         </p>
                     </Col>
                 </Row>
@@ -72,7 +72,7 @@ const AboutScreen = () => {
                     Lights, camera, and let the movie magic begin!
                     </p>
                     <p>
-                    The CineScope Team
+                    The <span style = {{fontWeight: "bold", color: "#ff6f00"}}>CineScope </span> Team
                     </p>
                     </Col>
                 </Row>
