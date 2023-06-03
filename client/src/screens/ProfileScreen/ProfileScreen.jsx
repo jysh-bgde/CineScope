@@ -9,7 +9,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import { useUpdateUserMutation } from '../../slices/usersApiSlice';
 import { setCredentials } from '../../slices/authSlice';
 import Header from '../../components/Header';
-import movieTitles from '../MovieScreen/utils';
+import movieTitles from '../RecommendationsScreen/utils';
 import FormInput from '../../components/FormInput';
 
 

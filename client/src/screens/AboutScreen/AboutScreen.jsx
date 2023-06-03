@@ -10,7 +10,7 @@ const AboutScreen = () => {
             <Container className='aboutScreen'>
                 <Row>
                     <Col>
-                        <h1> About Us</h1>
+                        <h1 ><span style={{borderBottom: '2px solid #636464'}}> About Us </span></h1>
                     </Col>
                 </Row>
                 <Row>
@@ -20,7 +20,7 @@ const AboutScreen = () => {
                 </Row>
                 <Row>
                     <Col>
-                        <h1> Our Story</h1>
+                        <h1> <span style={{borderBottom: '2px solid #636464'}}>Our Story</span></h1>
                         <p>
                             The idea for Cinescope was born out of a shared love for cinema and a desire to simplify the movie-watching experience. We realized that with the vast number of movies available today, finding the perfect film that aligns with your unique preferences can be a daunting task. That's why we set out to create an app that takes the guesswork out of movie recommendations and helps you find the films you'll love effortlessly.
                         </p>
@@ -29,7 +29,7 @@ const AboutScreen = () => {
 
                 <Row>
                     <Col>
-                        <h1> Our Mission</h1>
+                        <h1><span style={{borderBottom: '2px solid #636464'}}> Our Mission</span></h1>
                         <p>
                             At CineScope, our mission is to empower movie lovers by delivering personalized movie recommendations that truly resonate. We believe that everyone should have access to tailored film suggestions that cater to their individual tastes, whether they're passionate about classic films, indie gems, or the latest blockbusters. We are dedicated to making your movie nights memorable, exciting, and filled with cinematic wonders.
                         </p>
@@ -38,7 +38,7 @@ const AboutScreen = () => {
 
                 <Row>
                     <Col>
-                        <h1> How it Works</h1>
+                        <h1><span style={{borderBottom: '2px solid #636464'}}> How it Works</span></h1>
                         <p>
                             Using cutting-edge algorithms and machine learning techniques, CineScope analyzes your movie preferences, including genres, actors, directors, and more. Our advanced recommendation engine then generates a curated list of movies that perfectly align with your unique taste. Say goodbye to endless scrolling and hello to a personalized movie discovery experience that brings you closer to films that truly captivate you.
                         </p>
@@ -47,7 +47,7 @@ const AboutScreen = () => {
 
                 <Row>
                     <Col>
-                        <h1> Features and Benefits</h1>
+                        <h1><span style={{borderBottom: '2px solid #636464'}}> Features and Benefits</span></h1>
                        
                         <ListGroup >
       <ListGroup.Item variant = "light"><span style={{fontWeight: "bold", color: "#ff6f00" }}>Personalized Recommendations:</span> Discover movies tailored to your specific preferences, ensuring that every film you watch is a delightful experience.</ListGroup.Item>
@@ -60,7 +60,7 @@ const AboutScreen = () => {
                 </Row>
                 <Row>
                     <Col>
-                        <h1> Join CineScope Today</h1>
+                        <h1><span style={{borderBottom: '2px solid #636464'}}> Join CineScope Today</span></h1>
                         <p>
                         We invite you to <Link to = '/signup' style = {{textDecoration: "none"}}><span style = {{fontWeight: "bold", color: "#ff6f00"}}>JOIN </span></Link> our ever-growing community of movie lovers and unlock a world of cinematic wonders with CineScope. Whether you're seeking a heartwarming drama, an adrenaline-pumping action flick, or an intellectually stimulating indie film, we have something for everyone. Start your personalized movie journey today and experience the magic of CineScope.
                         </p>

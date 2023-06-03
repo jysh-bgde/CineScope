@@ -3,7 +3,7 @@ import { Container, Card, Button, Row, Col, Stack, Form } from 'react-bootstrap'
 import '../HomeScreen/HomeScreen.css'
 import { LinkContainer } from 'react-router-bootstrap';
 import Header from '../../components/Header'
-import movieTitles from '../MovieScreen/utils'
+import movieTitles from '../RecommendationsScreen/utils'
 import Cards from '../../components/Cards'
 import { client } from "@gradio/client";
 import Search from '../../components/Search';

@@ -1,0 +1,30 @@
+body
+{
+    height: 100vh;
+    background-color: #121212;
+}
+
+.movieScreen
+{
+    
+    color: white;
+    height: 10vh;
+    position: sticky;
+    top: 0;
+    z-index: 99;
+
+}
+.movieInput
+{
+    border-radius: 0.5rem;
+    width: 100%;
+}
+
+
+
+.cardContainer
+{   height: 100%;
+    /* background-color: #212529; */
+    color: white;
+}
+

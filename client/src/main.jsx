@@ -11,10 +11,11 @@ import store from './store.js'
 import { Provider } from 'react-redux'
 import ProfileScreen from './screens/ProfileScreen/ProfileScreen.jsx'
 import PrivateRoute from './components/PrivateRoute.jsx'
-import MovieScreen from './screens/MovieScreen/MovieScreen.jsx'
+import RecommendationsScreen from './screens/RecommendationsScreen/RecommendationsScreen.jsx'
 import ErrorScreen from './screens/ErrorScreen/ErrorScreen.jsx'
 import ContactScreen from './screens/ContactScreen/ContactScreen.jsx'
 import AboutScreen from './screens/AboutScreen/AboutScreen.jsx'
+import MovieScreen from './screens/MovieScreen/MovieScreen.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,11 +24,12 @@ const router = createBrowserRouter(
       <Route path="/login" element = {<LoginScreen/>} />
       <Route path="/signup" element = {<SignUpScreen/>} />
       <Route path="/about" element = {<AboutScreen/>} />
+      <Route path='/movies/:movieId' element = {<MovieScreen/>} />
       <Route path="*" element = {<ErrorScreen/>} />
+      <Route path="/contact" element = {<ContactScreen/>} />
 
       <Route path = '' element = {<PrivateRoute/>} >
-      <Route path="/movies" element = {<MovieScreen/>} />
-      <Route path="/contact" element = {<ContactScreen/>} />
+      <Route path="/movies" element = {<RecommendationsScreen/>} />
       <Route path="/profile" element = {<ProfileScreen/>} />
       </Route>
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Col, Container, Form, Row } from 'react-bootstrap'
-import movieTitles from '../screens/MovieScreen/utils'
+import movieTitles from '../screens/RecommendationsScreen/utils'
 import Cards from './Cards'
 import { client } from "@gradio/client";
 
@@ -20,7 +20,9 @@ const Search = (props) => {
       
         const app = await client(endpoint);
         const result = await app.predict("/predict", [movie]);
-          setReccomendations(result.data[0])
+        
+        setReccomendations(result.data[0])
+
           setLoading(false)
       }
             
@@ -28,9 +30,9 @@ const Search = (props) => {
 
   return (
     <>
-    <Container fluid className='pt-2 movieScreen' >
-    <Row>
-        <Col>
+    <Container fluid className='pt-2 ' >
+    <Row >
+        <Col >
         <Form className="d-flex" onSubmit={submitHandler}>
         <input type='search'
         list='movies'
@@ -39,7 +41,7 @@ const Search = (props) => {
           className="me-2 movieInput"
           aria-label="Search"
           value={movie}
-          onChange={(e)=>setMovie(e.target.value)}
+          onChange={(e)=>setMovie( e.target.value)}
           autoComplete='on'
         /> 
 

@@ -35,16 +35,24 @@ const Header = () => {
       .btn-one {
         background-color: #ff6f00;
         color: #f9f7f8;
+      
        
       }
       .btn-two {
         background-color: #f9f7f8 ;
         color: #ff6f00;
+       
       
       }
-      .btn-one:hover, .btn-two:hover
-      { background-color: black;
-        border: 1px solid white
+      .btn-one:hover
+      { 
+        background-color: #ef6800;
+        color: white
+      }
+      .btn-two:hover
+      { 
+        background-color: #dddddd ;
+        color: #ff6f00;
       }
       .card-header{
         color: #ff6f00;
@@ -62,7 +70,7 @@ const Header = () => {
     <header className='header'>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant='dark'>
         <Container>
-          <LinkContainer to='/movies'>
+          <LinkContainer to={userInfo ? ('/movies') : ('/')}>
             <Navbar.Brand className='logo' >CineScope</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />

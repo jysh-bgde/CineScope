@@ -1,30 +1,17 @@
-body
-{
-    height: 100vh;
-    background-color: #212529;
-}
-
 .movieScreen
 {
-    
-    color: white;
-    height: 10vh;
-    position: sticky;
-    top: 0;
-    z-index: 99;
-
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
 }
-.movieInput
+
+.movieContainer
 {
-    border-radius: 0.5rem;
-    width: 100%;
-}
-
-
-
-.cardContainer
-{   height: 100%;
-    /* background-color: #212529; */
     color: white;
+    background-color: #212529;
+    border-radius: 0.5rem;
+    
 }
 
