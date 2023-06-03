@@ -42,6 +42,10 @@ const Header = () => {
         color: #ff6f00;
       
       }
+      .btn-one:hover, .btn-two:hover
+      { background-color: black;
+        border: 1px solid white
+      }
       .card-header{
         color: #ff6f00;
         font-weight: bold;
