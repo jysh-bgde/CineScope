@@ -135,10 +135,49 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     
 });
 
+const likeMovie = asyncHandler(async (req, res) =>{
+    const user = await User.findById(req.user._id)
+    if(user)
+    {
+        user.likedMovies.push(req.body.movieId)
+        res.status(200).json({
+            message : "movieLiked"
+        })
+    }
+    else
+    {
+        res.status(404);
+        throw new Error('An error occured')
+    }
+
+})
+const unlikeMovie = asyncHandler(async (req, res) =>{
+    const user = await User.findById(req.user._id)
+    if(user)
+    {
+         const index = user.likedMovies.indexOf(req.body.movieId)
+            if(index > -1)
+            {
+                user.likedMovies.splice(index, 1)
+            }
+        res.status(200).json({
+            message : "movie uniked"
+        })
+    }
+    else
+    {
+        res.status(404);
+        throw new Error('An error occured')
+    }
+
+})
+
 export {
     authUser,
     getUserProfile,
     logoutUser,
     registerUser,
-    updateUserProfile
+    updateUserProfile,
+    unlikeMovie,
+    likeMovie
 }

@@ -20,9 +20,12 @@ const userScheme =  mongoose.Schema({
     },
     movies: {
         type : Object,
-        // required: true,
+      
 
     },
+    likedMovies: {
+        type : [String], 
+    }
     
 }, {
     timestamps: true

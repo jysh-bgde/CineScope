@@ -7,11 +7,12 @@
     height: auto;
 }
 
-.movieContainer
+.movieContainer, .similarMoviesContainer
 {
     color: white;
     background-color: #212529;
     border-radius: 0.5rem;
+    height: 100%;
     
 }
 

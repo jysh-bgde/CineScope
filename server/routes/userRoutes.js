@@ -4,7 +4,9 @@ import {
     registerUser,
     updateUserProfile,
     logoutUser,
-    getUserProfile
+    getUserProfile,
+    unlikeMovie,
+    likeMovie
 } from '../controllers/userController.js';
 import { protect } from '../middleware/authMiddleware.js';
 
@@ -14,5 +16,7 @@ router.post('/', registerUser)
 router.post('/auth', authUser)
 router.post('/logout', logoutUser)
 router.route('/profile').get(protect, getUserProfile).put(protect, updateUserProfile);
+router.put('/movies/unlike', unlikeMovie)
+router.put('/movies/like', likeMovie)
 
 export default router;
