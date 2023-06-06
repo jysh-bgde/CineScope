@@ -32,6 +32,24 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                 })
             }
         ),
+        unlikeMovie: builder.mutation(
+            {
+                query: (data)=>({
+                    url: `${USERS_URL}/movies/unlike`,
+                    method: 'PUT',
+                    body: data
+                })
+            }
+        ),
+        likeMovie: builder.mutation(
+            {
+                query: (data)=>({
+                    url: `${USERS_URL}/movies/like`,
+                    method: 'PUT',
+                    body: data
+                })
+            }
+        ),
         logout: builder.mutation(
             {
                 query: () => (
@@ -46,4 +64,4 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     })
 
 
-export const {useLoginMutation, useLogoutMutation, useSignUpMutation, useUpdateUserMutation } = usersApiSlice;
+export const {useLoginMutation, useLogoutMutation, useSignUpMutation, useUpdateUserMutation, useUnlikeMovieMutation, useLikeMovieMutation } = usersApiSlice;

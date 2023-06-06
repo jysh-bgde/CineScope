@@ -6,18 +6,22 @@ import { useLocation } from 'react-router-dom';
 import { client } from "@gradio/client";
 import { LinkContainer } from 'react-router-bootstrap';
 import { AiOutlineHeart , AiFillHeart } from 'react-icons/ai';
-import { useSelector } from 'react-redux';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { setCredentials } from '../../slices/authSlice'
+import {toast} from 'react-toastify'
+import { useLikeMovieMutation, useUnlikeMovieMutation } from '../../slices/usersApiSlice';
 
 
 const MovieScreen = () => {
   const {userInfo} = useSelector((state) => state.auth);
-
+  const dispatch = useDispatch()
   const location = useLocation()
   const movie = location.state
   const endpoint = "https://jyshbgde-cinescope.hf.space";
   const [similarMovies, setSimilarMovies] = useState([]);
   const [loadingSimilarMovies, setLoadingSimilarMovies] = useState(false)
+  const [unlikeMovie] = useUnlikeMovieMutation()
+  const [likeMovie] = useLikeMovieMutation()
 
   useEffect(() => {
     setLoadingSimilarMovies(true)
@@ -34,6 +38,48 @@ const MovieScreen = () => {
     
   },[movie.movieTitle])
   
+  async function handleUnlike(e, movieId){
+    e.preventDefault()
+    try {
+
+      const response = await unlikeMovie({
+        movieId : movieId
+      }).unwrap();
+      dispatch(setCredentials({...response}))
+  
+      navigate('/movies') 
+      
+      toast.success("movie unliked")
+    } catch (err) {
+      toast.error(err?.data?.message || err?.error)
+    }
+
+  
+  }
+
+  async function handleLike(e, movieId)
+  {
+    e.preventDefault()
+    console.log(movieId)
+    try {
+   
+      const response = await likeMovie({
+        movieId : movieId
+      }).unwrap();
+     
+      dispatch(setCredentials({...response}))
+    
+      
+      navigate('/movies') 
+      toast.success("movie liked")
+    } catch (err) {
+      toast.error(err?.data?.message || err?.error)
+    }
+  }
+  
+
+
+
   
   return (
     <>
@@ -41,13 +87,24 @@ const MovieScreen = () => {
     <Container  fluid className='movieScreen ' >
       <Row>
         
-        <Col>
+        <Col sm={12} md={6} className='my-2'>
         
     <Container className='movieContainer my-2 ' >
       <Row className='movieTitleRow'>
         <Col>
         <h1 style={{borderBottom: '2px solid #636464'}}>{movie.movieTitle} </h1>
-        
+        <span style={{cursor: "pointer"}}>{userInfo ?
+        (
+          userInfo.likedMovies?.includes(movie.movieId) ?
+          (
+            <AiFillHeart  color='red'  onClick={(e)=>handleUnlike(e, movie.movieId)}/>
+
+          ) :
+         
+          
+          (  <AiOutlineHeart color='red' onClick = {(e)=>handleLike(e, movie.movieId)}/>)
+        )
+          : ("")}</span>
         </Col>  
       </Row>
       <Row className='pt-2'>
@@ -78,7 +135,7 @@ const MovieScreen = () => {
       </Row>
     </Container>
         </Col>
-        <Col>
+        <Col sm={12} md = {6} className='my-2' >
         
         <Container className='similarMoviesContainer my-2' >
 {loadingSimilarMovies ? (<Row>
@@ -100,7 +157,7 @@ const MovieScreen = () => {
       casts: similarMovie[4],
       director: similarMovie[5],
     }}><Row >
-        <Col>
+        <Col className='similarMovie'>
         {similarMovie[1]}
         </Col>
       </Row></LinkContainer>)

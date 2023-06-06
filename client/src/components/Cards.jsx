@@ -2,40 +2,59 @@ import React from 'react'
 import { Container,Card, Col, Row } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import {AiOutlineHeart, AiFillHeart} from 'react-icons/ai';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useUnlikeMovieMutation, useLikeMovieMutation } from '../slices/usersApiSlice';
+import { setCredentials } from '../slices/authSlice';
+import {toast} from 'react-toastify'
 
 const Cards = ({recommendations}) => {
 
 
 
   const {userInfo} = useSelector((state) => state.auth);
+  const dispatch = useDispatch()
+  const [unlikeMovie] = useUnlikeMovieMutation()
+  const [likeMovie] = useLikeMovieMutation()
   let length = 0
 
    async function handleUnlike(e, movieId){
-      const response = await fetch("/api/users/movies/unlike", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({movieId : movieId})
-      });
+    e.preventDefault()
+    try {
 
-      const data = await response.json()
-      console.log(data)
+      const response = await unlikeMovie({
+        movieId : movieId
+      }).unwrap();
+      dispatch(setCredentials({...response}))
+      navigate('/movies') 
+
+      toast.success("movie unliked")
+    } catch (err) {
+      toast.error(err?.data?.message || err?.error)
+    }
+
+      // const data = await response.json()
+      // console.log(data)
   }
 
   async function handleLike(e, movieId)
   {
-    const response = await fetch("/api/users/movies/like", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({movieId : movieId})
-    });
+    e.preventDefault()
+    try {
+   
+      const response = await likeMovie({
+        movieId : movieId
+      }).unwrap();
+      console.log(response)
+      dispatch(setCredentials({...response}))
+    
+      navigate('/movies') 
+      toast.success("movie liked")
+    } catch (err) {
+      toast.error(err?.data?.message || err?.error)
+    }
 
-    const data = await response.json()
-    console.log(data)
+      // const data = await response.json()
+      // console.log(data)
   }
   
   if(recommendations && recommendations.length > 1)
@@ -53,18 +72,18 @@ const Cards = ({recommendations}) => {
       <Card >
         <Card.Header style = {{borderBottom: '2px solid #636464'}}  >
           {recommendations[idx][1]} 
-          {/* <span>{userInfo ?
+          <span>{userInfo ?
         (
-          userInfo.likedMovies.includes(recommendations[idx][0]) ?
+          userInfo.likedMovies?.includes(recommendations[idx][0]) ?
           (
-            <AiFillHeart onClick={(e)=>handleUnlike(e, recommendations[idx][0])}/>
+            <AiFillHeart color='red' onClick={(e)=>handleUnlike(e, recommendations[idx][0])}/>
 
           ) :
          
           
-          (  <AiOutlineHeart onClick = {(e)=>handleLike(e, recommendations[idx][0])}/>)
-          )
-          : ("")}</span> */}
+          (  <AiOutlineHeart color='red' onClick = {(e)=>handleLike(e, recommendations[idx][0])}/>)
+        )
+          : ("")}</span>
         </Card.Header>
       
         <LinkContainer to = {`/movies/${recommendations[idx][0]}`} style = {{cursor: "pointer"}} state = {{
@@ -99,5 +118,3 @@ const Cards = ({recommendations}) => {
 }
 
 export default Cards
-
-// movieId, movieTitle, overview, genres, cast , director

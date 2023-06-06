@@ -1,20 +1,25 @@
+
+
 .contactScreen
 {
-    color: white
+    color: white;
+    background-color: #212529;
+    border-radius: 0.5rem;
+   
 }
 
 .feedbackForm
 {
     text-decoration: none;
-    color: white;
+    color: #ff6f00;
     font-size: 2rem;
-    font-family: Arial, Helvetica, sans-serif;
+    
+    
 }
 
 .connect
 {   vertical-align: middle;
     text-decoration: none;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 .twitterConnect 
@@ -28,4 +33,20 @@
 .instagramConnect
 {   
     color: #FF0169;
+}
+
+.gmailConnect
+{
+   
+    color: #fbbf12;
+  
+}
+
+a
+{
+    text-decoration: none;
+}
+a:hover
+{
+    color: white
 }

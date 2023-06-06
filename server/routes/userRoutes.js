@@ -16,7 +16,8 @@ router.post('/', registerUser)
 router.post('/auth', authUser)
 router.post('/logout', logoutUser)
 router.route('/profile').get(protect, getUserProfile).put(protect, updateUserProfile);
-router.put('/movies/unlike', unlikeMovie)
-router.put('/movies/like', likeMovie)
+router.route('/movies/like').put(protect, likeMovie);
+router.route('/movies/unlike').put(protect, unlikeMovie);
+
 
 export default router;

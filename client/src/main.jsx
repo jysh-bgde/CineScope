@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import {createRoutesFromElements, createBrowserRouter, Route, RouterProvider} from 'react-router-dom'
-// import './index.css'
+import './index.css'
 import "bootstrap/dist/css/bootstrap.min.css"
 import HomeScreen from './screens/HomeScreen/HomeScreen.jsx'
 import LoginScreen from './screens/LoginScreen/LoginScreen.jsx'

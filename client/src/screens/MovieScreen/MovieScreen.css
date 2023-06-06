@@ -1,3 +1,4 @@
+
 .movieScreen
 {
     display: flex;
@@ -5,6 +6,7 @@
     justify-content: center;
     align-items: center;
     height: auto;
+    
 }
 
 .movieContainer, .similarMoviesContainer
@@ -16,3 +18,8 @@
     
 }
 
+.similarMovie:hover
+{
+color: #ff6f00;
+font-weight: bold;
+}

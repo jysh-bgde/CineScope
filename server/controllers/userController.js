@@ -17,7 +17,8 @@ const authUser = asyncHandler(async (req, res) => {
             _id : user._id,
             name: user.name,
             email: user.email,
-            movies: user.movies
+            movies: user.movies,
+            likedMovies: user.likedMovies
         })
         
     }
@@ -59,7 +60,9 @@ const registerUser = asyncHandler(async (req, res) => {
             _id : user._id,
             name: user.name,
             email: user.email,
-            movies: user.movies
+            movies: user.movies,
+            likedMovies: user.likedMovies
+
         })
         
     }
@@ -94,7 +97,8 @@ const getUserProfile = asyncHandler(async (req, res) => {
         _id : req.user._id,
         name: req.user.name,
         email: req.user.email,
-        movies: req.user.movies
+        movies: req.user.movies,
+        likedMovies: req.user.likedMovies
     }
  
     res.status(200).json(user);
@@ -123,7 +127,8 @@ const updateUserProfile = asyncHandler(async (req, res) => {
             _id: updatedUser._id,
             name: updatedUser.name,
             email: updatedUser.email,
-            movies: updatedUser.movies
+            movies: updatedUser.movies,
+            likedMovies: updatedUser.likedMovies
 
         })
     }
@@ -140,8 +145,13 @@ const likeMovie = asyncHandler(async (req, res) =>{
     if(user)
     {
         user.likedMovies.push(req.body.movieId)
+        const updatedUser = await user.save();
         res.status(200).json({
-            message : "movieLiked"
+            _id: updatedUser._id,
+            name: updatedUser.name,
+            email: updatedUser.email,
+            movies: updatedUser.movies,
+            likedMovies : updatedUser.likedMovies
         })
     }
     else
@@ -160,8 +170,13 @@ const unlikeMovie = asyncHandler(async (req, res) =>{
             {
                 user.likedMovies.splice(index, 1)
             }
+            const updatedUser = await user.save();
         res.status(200).json({
-            message : "movie uniked"
+            _id: updatedUser._id,
+            name: updatedUser.name,
+            email: updatedUser.email,
+            movies: updatedUser.movies,
+            likedMovies : updatedUser.likedMovies
         })
     }
     else
