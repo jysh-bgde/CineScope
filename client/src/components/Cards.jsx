@@ -29,10 +29,10 @@ const Cards = ({recommendations}) => {
           genres: movie[3],
           casts: movie[4],
           director: movie[5],
-          comments: [],
+          comments: []
         }
       }).unwrap();
-     
+      
       
       dispatch(setCredentials({...response}))
       navigate('/movies') 
@@ -60,10 +60,9 @@ const Cards = ({recommendations}) => {
           genres: movie[3],
           casts: movie[4],
           director: movie[5],
-          comments: [],
+          comments: []
         }
       }).unwrap();
-      
       
       dispatch(setCredentials({...response}))
     
@@ -112,6 +111,7 @@ const Cards = ({recommendations}) => {
           genres: recommendations[idx][3],
           casts: recommendations[idx][4],
           director: recommendations[idx][5],
+          comments: []
         }}>
         <Card.Body>
           <Card.Text>

@@ -4,7 +4,7 @@ import { toast } from 'react-toastify'
 import { Col, Container, Row, Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { AiFillDelete } from 'react-icons/ai';
-
+import {FaCommentDots} from 'react-icons/fa'
 
 const MovieComments = ({ movie }) => {
 
@@ -87,7 +87,10 @@ const MovieComments = ({ movie }) => {
                 <Col>
                     <Row style={{ color: "#ff6f00", fontWeight: "bold", borderBottom: "2px solid rgb(99, 100, 100)" }}>
                         <Col>
-                            <h2>Comments</h2>
+                            <h2>Comments </h2>
+                        </Col>
+                        <Col>
+                        <span style={{height: "auto", fontSize: "1.5rem"}}><FaCommentDots size={30} /> {comments.length}</span>
                         </Col>
                         <Row >
                             <Col md={true} className='my-2'  >
