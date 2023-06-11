@@ -1,6 +1,7 @@
 import asyncHandler from 'express-async-handler'
 import User from '../models/userModel.js';
 import generateToken from '../utils/generateToken.js';
+import Movie from '../models/movieModel.js'
 
 
 //@desc Auth user/token
@@ -142,17 +143,53 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 
 const likeMovie = asyncHandler(async (req, res) =>{
     const user = await User.findById(req.user._id)
+    const movieId = req.body.movie.movieId
+    const movieDetails = req.body.movie
+    const movie = await Movie.findById(movieId)
     if(user)
-    {
-        user.likedMovies.push(req.body.movieId)
+    {   
+        user.likedMovies.push(movieDetails.movieId)
         const updatedUser = await user.save();
-        res.status(200).json({
-            _id: updatedUser._id,
-            name: updatedUser.name,
-            email: updatedUser.email,
-            movies: updatedUser.movies,
-            likedMovies : updatedUser.likedMovies
-        })
+
+        if(movie)
+        {
+            movie.likes.push({userId : user._id, userName : user.name})
+            
+            const updatedMovie = await movie.save();
+            
+
+                res.status(200).json({
+                    _id: updatedUser._id,
+                    name: updatedUser.name,
+                    email: updatedUser.email,
+                    movies: updatedUser.movies,
+                    likedMovies: updatedUser.likedMovies
+        
+                })
+        }
+        else
+        {
+            const updatedMovie = await Movie.create({
+                _id:movieDetails.movieId,
+                title: movieDetails.movieTitle,
+                genres: movieDetails.genres,
+                casts: movieDetails.casts,
+                director: movieDetails.director[0],
+                overview: movieDetails.overview,
+                likes : [{userId: user._id, userName: user.name}],       
+                comments : movieDetails.comments
+            })
+            res.status(200).json({
+                _id: updatedUser._id,
+                name: updatedUser.name,
+                email: updatedUser.email,
+                movies: updatedUser.movies,
+                likedMovies: updatedUser.likedMovies
+    
+            })
+        }
+
+
     }
     else
     {
@@ -163,21 +200,54 @@ const likeMovie = asyncHandler(async (req, res) =>{
 })
 const unlikeMovie = asyncHandler(async (req, res) =>{
     const user = await User.findById(req.user._id)
+    const movieDetails = req.body.movie
+    const movie = await Movie.findById(movieDetails.movieId)
     if(user)
-    {
-         const index = user.likedMovies.indexOf(req.body.movieId)
-            if(index > -1)
+    {    let updatedUser = {}
+        const index = user.likedMovies.indexOf(movieDetails.movieId)
+        if(index > -1)
+        {
+            user.likedMovies.splice(index, 1)
+             updatedUser = await user.save();
+        }
+        else
+        {
+            res.status(404);
+            throw new Error('An error occured')
+        }
+
+        if(movie)
+        {
+            const obj = movie.likes.find((obj) => (obj.userId.equals(user._id)))
+            if(obj)
             {
-                user.likedMovies.splice(index, 1)
+                const index = movie.likes.indexOf(obj)
+                movie.likes.splice(index, 1)
+                const updatedMovie = await movie.save()
+                res.status(200).json({
+                    _id: updatedUser._id,
+                    name: updatedUser.name,
+                    email: updatedUser.email,
+                    movies: updatedUser.movies,
+                    likedMovies: updatedUser.likedMovies
+        
+                })
+                
             }
-            const updatedUser = await user.save();
-        res.status(200).json({
-            _id: updatedUser._id,
-            name: updatedUser.name,
-            email: updatedUser.email,
-            movies: updatedUser.movies,
-            likedMovies : updatedUser.likedMovies
-        })
+            else
+            {
+                res.status(404);
+            throw new Error('An error occured')
+            }
+        }
+        else
+        {
+            res.status(404);
+            throw new Error('An error occured')
+        }
+
+       
+       
     }
     else
     {

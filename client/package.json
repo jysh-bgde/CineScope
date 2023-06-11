@@ -12,6 +12,7 @@
   "dependencies": {
     "@gradio/client": "^0.1.1",
     "@reduxjs/toolkit": "^1.9.5",
+    "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",

@@ -17,13 +17,23 @@ const Cards = ({recommendations}) => {
   const [likeMovie] = useLikeMovieMutation()
   let length = 0
 
-   async function handleUnlike(e, movieId){
+   async function handleUnlike(e, movie){
     e.preventDefault()
     try {
 
       const response = await unlikeMovie({
-        movieId : movieId
+        movie : {
+          movieId: movie[0],
+          movieTitle: movie[1],
+          overview: movie[2],
+          genres: movie[3],
+          casts: movie[4],
+          director: movie[5],
+          comments: [],
+        }
       }).unwrap();
+     
+      
       dispatch(setCredentials({...response}))
       navigate('/movies') 
 
@@ -32,19 +42,29 @@ const Cards = ({recommendations}) => {
       toast.error(err?.data?.message || err?.error)
     }
 
-      // const data = await response.json()
-      // console.log(data)
+    
   }
 
-  async function handleLike(e, movieId)
+  async function handleLike(e, movie)
   {
     e.preventDefault()
+
+
     try {
    
       const response = await likeMovie({
-        movieId : movieId
+        movie : {
+          movieId: movie[0],
+          movieTitle: movie[1],
+          overview: movie[2],
+          genres: movie[3],
+          casts: movie[4],
+          director: movie[5],
+          comments: [],
+        }
       }).unwrap();
-      console.log(response)
+      
+      
       dispatch(setCredentials({...response}))
     
       navigate('/movies') 
@@ -53,8 +73,7 @@ const Cards = ({recommendations}) => {
       toast.error(err?.data?.message || err?.error)
     }
 
-      // const data = await response.json()
-      // console.log(data)
+    
   }
   
   if(recommendations && recommendations.length > 1)
@@ -76,12 +95,12 @@ const Cards = ({recommendations}) => {
         (
           userInfo.likedMovies?.includes(recommendations[idx][0]) ?
           (
-            <AiFillHeart color='red' onClick={(e)=>handleUnlike(e, recommendations[idx][0])}/>
+            <AiFillHeart color='red' onClick={(e)=>handleUnlike(e, recommendations[idx])}/>
 
           ) :
          
           
-          (  <AiOutlineHeart color='red' onClick = {(e)=>handleLike(e, recommendations[idx][0])}/>)
+          (  <AiOutlineHeart color='red' onClick = {(e)=>handleLike(e, recommendations[idx])}/>)
         )
           : ("")}</span>
         </Card.Header>
