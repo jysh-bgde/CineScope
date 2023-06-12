@@ -11,6 +11,6 @@ const router = express.Router();
 
 router.route("/:movieId/addMovieComment").post( protect, addMovieComment);
 router.route("/:movieId/deleteMovieComment").delete( protect, deleteMovieComment);
-router.route("/:movieId/movieComments").get( protect, movieComments);
+router.route("/:movieId/movieComments").post( protect, movieComments);
 
 export default router;

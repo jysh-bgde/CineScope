@@ -61,18 +61,30 @@ const movieComments = asyncHandler(async (req, res)=> {
     const user = await User.findById(req.user._id)
     const movieId = req.params.movieId
     const movie = await Movie.findById(movieId)
-
+    const movieDetails = req.body.movie
+    // console.log(65, movieDetails)
+    
     if(user)
     {
-
+        
         if(movie)
-        {  
+        {   
+            // console.log(72, movie)
             res.status(200).send(movie)
         }
         else
-        {
-            res.status(404);
-            throw new Error("Movie doesnt exist")
+        {   const updatedMovie = await Movie.create({
+            _id: movieDetails.movieId,
+            title: movieDetails.movieTitle,
+            genres: movieDetails.genres,
+            casts: movieDetails.casts,
+            director: movieDetails.director[0],
+            overview: movieDetails.overview,
+            likes : movieDetails.likes,       
+            comments : movieDetails.comments
+        })
+        // console.log(85, updatedMovie)
+        res.status(200).send(updatedMovie)
         }
     }
     else

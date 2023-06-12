@@ -5,7 +5,7 @@ import { Col, Container, Row} from 'react-bootstrap';
 import { AiOutlineHeart , AiFillHeart } from 'react-icons/ai';
 import { setCredentials } from '../slices/authSlice'
 import {toast} from 'react-toastify'
-const MovieDetails = ({ movie }) => {
+const MovieDetails = ({ movie, likesCount , setLikesCount}) => {
     const {userInfo} = useSelector((state) => state.auth);
   const dispatch = useDispatch()
 
@@ -17,12 +17,12 @@ const MovieDetails = ({ movie }) => {
     async function handleUnlike(e, movie){
         e.preventDefault()
         try {
-    
+          
           const response = await unlikeMovie({
             movie : movie
           }).unwrap();
           dispatch(setCredentials({...response}))
-      
+          setLikesCount(prev => prev-1)
           navigate('/movies') 
           
           toast.success("movie unliked")
@@ -41,6 +41,8 @@ const MovieDetails = ({ movie }) => {
           const response = await likeMovie({
             movie : movie
           }).unwrap();
+          setLikesCount(prev => prev+1)
+
           dispatch(setCredentials({...response}))
         
           
@@ -60,13 +62,21 @@ const MovieDetails = ({ movie }) => {
         <span style={{cursor: "pointer"}}>{userInfo ?
         (
           userInfo.likedMovies?.includes(movie.movieId) ?
-          (
-            <AiFillHeart  color='red'  onClick={(e)=>handleUnlike(e, movie)}/>
+          ( <>
+          <AiFillHeart  color='red'  onClick={(e)=>handleUnlike(e, movie)}/>
+          <span> {likesCount}</span>
+          </>
+            
 
           ) :
          
           
-          (  <AiOutlineHeart color='red' onClick = {(e)=>handleLike(e, movie)}/>)
+          ( 
+              <>
+            <AiOutlineHeart color='red' onClick = {(e)=>handleLike(e, movie)}/>
+            <span>{likesCount}</span>
+            </>
+            )
         )
           : ("")}</span>
         </Col>  

@@ -6,39 +6,47 @@ import { useSelector } from 'react-redux';
 import { AiFillDelete } from 'react-icons/ai';
 import {FaCommentDots} from 'react-icons/fa'
 
-const MovieComments = ({ movie }) => {
+const MovieComments = ({ movie, comments, setComments }) => {
 
     const { userInfo } = useSelector((state) => state.auth);
 
     const [comment, setComment] = useState("")
-    const [comments, setComments] = useState([])
-    const [loadingComments, setLoadingComments] = useState(true)
-
-
+    // const [comments, setComments] = useState([])
+    // const [loadingComments, setLoadingComments] = useState(true)
     useEffect(() => {
+      
+    setComments(movie.comments)
+    console.log(movie.comments)
+      return () => {
+        setComments([])
+      }
+    }, [movie.comments])
+    
 
-        async function loadComments() {
-            try {
-                const response = await axios.get(`/api/movies/${movie.movieId}/movieComments`)
-                const comments = response.data.comments
+    // useEffect(() => {
 
-                setComments(comments)
-                //no comments is also ok
-                setLoadingComments(false)
+    //     async function loadComments() {
+    //         try {
+    //             const response = await axios.get(`/api/movies/${movie.movieId}/movieComments`)
+    //             const comments = response.data.comments
 
-            } catch (err) {
-                setLoadingComments(false)
-            }
-        }
+    //             setComments(comments)
+    //             //no comments is also ok
+    //             setLoadingComments(false)
 
-        loadComments()
+    //         } catch (err) {
+    //             setLoadingComments(false)
+    //         }
+    //     }
 
-        return () => {
-            setComment("")
-            setComments([])
-        }
+    //     loadComments()
 
-    }, [movie.movieId])
+    //     return () => {
+    //         setComment("")
+    //         setComments([])
+    //     }
+
+    // }, [movie.movieId])
 
 
     async function handleAddMovieComment(e) {
