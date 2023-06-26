@@ -143,12 +143,12 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 
 const likeMovie = asyncHandler(async (req, res) =>{
     const user = await User.findById(req.user._id)
-    const movieId = req.body.movie.movieId
+    const movieId = req.body.movie._id
     const movieDetails = req.body.movie
     const movie = await Movie.findById(movieId)
     if(user)
     {   
-        user.likedMovies.push(movieDetails.movieId)
+        user.likedMovies.push(movieDetails._id)
         const updatedUser = await user.save();
 
         if(movie)
@@ -170,11 +170,11 @@ const likeMovie = asyncHandler(async (req, res) =>{
         else
         {
             const updatedMovie = await Movie.create({
-                _id:movieDetails.movieId,
-                title: movieDetails.movieTitle,
+                _id:movieDetails._id,
+                title: movieDetails.title,
                 genres: movieDetails.genres,
                 casts: movieDetails.casts,
-                director: movieDetails.director[0],
+                director: movieDetails.crew[0],
                 overview: movieDetails.overview,
                 likes : [{userId: user._id, userName: user.name}],       
                 comments : movieDetails.comments
@@ -201,10 +201,10 @@ const likeMovie = asyncHandler(async (req, res) =>{
 const unlikeMovie = asyncHandler(async (req, res) =>{
     const user = await User.findById(req.user._id)
     const movieDetails = req.body.movie
-    const movie = await Movie.findById(movieDetails.movieId)
+    const movie = await Movie.findById(movieDetails._id)
     if(user)
     {    let updatedUser = {}
-        const index = user.likedMovies.indexOf(movieDetails.movieId)
+        const index = user.likedMovies.indexOf(movieDetails._id)
         if(index > -1)
         {
             user.likedMovies.splice(index, 1)

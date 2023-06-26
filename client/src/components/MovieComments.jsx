@@ -4,7 +4,7 @@ import { toast } from 'react-toastify'
 import { Col, Container, Row, Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { AiFillDelete } from 'react-icons/ai';
-import {FaCommentDots} from 'react-icons/fa'
+import { FaCommentDots } from 'react-icons/fa'
 
 const MovieComments = ({ movie, comments, setComments }) => {
 
@@ -14,14 +14,14 @@ const MovieComments = ({ movie, comments, setComments }) => {
     // const [comments, setComments] = useState([])
     // const [loadingComments, setLoadingComments] = useState(true)
     useEffect(() => {
-      
-    setComments(movie.comments)
-    console.log(movie.comments)
-      return () => {
-        setComments([])
-      }
+
+        setComments(movie.comments)
+        
+        return () => {
+            setComments([])
+        }
     }, [movie.comments])
-    
+
 
     // useEffect(() => {
 
@@ -56,7 +56,7 @@ const MovieComments = ({ movie, comments, setComments }) => {
                 toast.error("comment cant be empty")
             }
             else {
-                const response = await axios.post(`/api/movies/${movie.movieId}/addMovieComment`, { ...movie, comment: comment })
+                const response = await axios.post(`/api/movies/${movie._id}/addMovieComment`, { ...movie, comment: comment })
 
                 setComments(response.data.comments)
                 setComment("")
@@ -75,7 +75,7 @@ const MovieComments = ({ movie, comments, setComments }) => {
 
     async function handelDeleteMovieComment(e, comment) {
         try {
-            const response = await axios.delete(`/api/movies/${movie.movieId}/deleteMovieComment`, { data: { ...movie, comment: comment } })
+            const response = await axios.delete(`/api/movies/${movie._id}/deleteMovieComment`, { data: { ...movie, comment: comment } })
 
             setComments(response.data.comments)
 
@@ -98,7 +98,7 @@ const MovieComments = ({ movie, comments, setComments }) => {
                             <h2>Comments </h2>
                         </Col>
                         <Col>
-                        <span style={{height: "auto", fontSize: "1.5rem"}}><FaCommentDots size={30} /> {comments.length}</span>
+                            <span style={{ height: "auto", fontSize: "1.5rem" }}><FaCommentDots size={30} /> {comments?.length}</span>
                         </Col>
                         <Row >
                             <Col md={true} className='my-2'  >

@@ -10,6 +10,7 @@ const Search = (props) => {
     const [recommendations, setReccomendations] = useState([])
     const [movieTitlesList, setMovieTitlesList] = useState(movieTitles)
     const [loading, setLoading] = useState(false)
+    
   const endpoint = "https://jyshbgde-cinescope.hf.space";
 
   

@@ -58,10 +58,10 @@ const MovieDetails = ({ movie, likesCount , setLikesCount}) => {
     <Container className='movieContainer my-2 ' >
       <Row className='movieTitleRow'>
         <Col>
-        <h1 style={{borderBottom: '2px solid #636464'}}>{movie.movieTitle} </h1>
+        <h1 style={{borderBottom: '2px solid #636464'}}>{movie.title} </h1>
         <span style={{cursor: "pointer"}}>{userInfo ?
         (
-          userInfo.likedMovies?.includes(movie.movieId) ?
+          userInfo.likedMovies?.includes(movie._id) ?
           ( <>
           <AiFillHeart  color='red'  onClick={(e)=>handleUnlike(e, movie)}/>
           <span> {likesCount}</span>
@@ -99,7 +99,7 @@ const MovieDetails = ({ movie, likesCount , setLikesCount}) => {
         </Row>
         <Row>
         <Col>
-        <p><span style = {{color: "#ff6f00", fontWeight:'bold'}}>Director:</span> {movie.director[0]}</p>
+        <p><span style = {{color: "#ff6f00", fontWeight:'bold'}}>Director:</span> {movie.crew[0]}</p>
         </Col>    
       </Row>
       <Row>

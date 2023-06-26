@@ -36,11 +36,11 @@ const addMovieComment = asyncHandler(async (req, res) => {
 
             
             const updatedMovie = await Movie.create({
-            _id: movieDetails.movieId,
-            title: movieDetails.movieTitle,
+            _id: movieDetails._id,
+            title: movieDetails.title,
             genres: movieDetails.genres,
             casts: movieDetails.casts,
-            director: movieDetails.director[0],
+            director: movieDetails.crew[0],
             overview: movieDetails.overview,
             likes : movieDetails.likes,       
             comments : comments
@@ -74,11 +74,11 @@ const movieComments = asyncHandler(async (req, res)=> {
         }
         else
         {   const updatedMovie = await Movie.create({
-            _id: movieDetails.movieId,
-            title: movieDetails.movieTitle,
+            _id: movieDetails._id,
+            title: movieDetails.title,
             genres: movieDetails.genres,
             casts: movieDetails.casts,
-            director: movieDetails.director[0],
+            director: movieDetails.crew[0],
             overview: movieDetails.overview,
             likes : movieDetails.likes,       
             comments : movieDetails.comments

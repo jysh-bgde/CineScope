@@ -15,7 +15,7 @@ const SimilarMovies = ({movie}) => {
         async function moreRecommendations(){
       
             const app = await client(endpoint);
-            const result = await app.predict("/predict", [movie.movieTitle]);
+            const result = await app.predict("/predict", [movie.title]);
             
             setSimilarMovies(result.data[0])
             setLoadingSimilarMovies(false)
@@ -24,7 +24,7 @@ const SimilarMovies = ({movie}) => {
           moreRecommendations()
     
       
-    }, [movie.movieTitle])
+    }, [movie.title])
     
 
   return (
@@ -40,17 +40,9 @@ const SimilarMovies = ({movie}) => {
   </Row>
 
   {similarMovies.map((similarMovie, index)=>{
-    return (<LinkContainer key={similarMovie[0]} style = {{height: "auto", cursor: "pointer", borderBottom: (index===4) ? ("") : ("2px solid rgb(99, 100, 100)")}} to={`/movies/${similarMovie[0]}`} state={{
-      movieId: similarMovie[0],
-      movieTitle: similarMovie[1],
-      overview: similarMovie[2],
-      genres: similarMovie[3],
-      casts: similarMovie[4],
-      director: similarMovie[5],
-      comments: [],
-    }}><Row >
+    return (<LinkContainer key={similarMovie._id} style = {{height: "auto", cursor: "pointer", borderBottom: (index===4) ? ("") : ("2px solid rgb(99, 100, 100)")}} to={`/movies/${similarMovie._id}`} state={similarMovie}><Row>
         <Col className='similarMovie'>
-        {similarMovie[1]}
+        {similarMovie.title}
         </Col>
       </Row></LinkContainer>)
   })}

@@ -73,6 +73,9 @@ const Header = () => {
           <LinkContainer to={userInfo ? ('/movies') : ('/')}>
             <Navbar.Brand className='logo' >CineScope</Navbar.Brand>
           </LinkContainer>
+          {/* <LinkContainer to='/movies/quizzes' style={{cursor: "pointer"}}>
+           <Navbar.Text >Movie Quizes</Navbar.Text>
+          </LinkContainer> */}
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">

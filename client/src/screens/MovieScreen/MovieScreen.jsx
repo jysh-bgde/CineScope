@@ -30,7 +30,7 @@ const MovieScreen = () => {
 
       async function loadComments() {
           try {
-              const response = await axios.post(`/api/movies/${movie.movieId}/movieComments`, {movie: movie})
+              const response = await axios.post(`/api/movies/${movie._id}/movieComments`, {movie: movie})
               // console.log(32, response)
               const comments = response.data.comments
               setLikesCount(response.data.likes.length)
@@ -53,7 +53,7 @@ const MovieScreen = () => {
          
       }
 
-  }, [movie.movieId])
+  }, [movie._id])
 
 
 
@@ -76,7 +76,7 @@ const MovieScreen = () => {
 
           {userInfo ? (
             <MovieComments movie={movie} comments = {comments} setComment={setComment} setComments={setComments} />
-          ) : ("")}
+          ) : ("Log In/sign Up to view and add comments ")}
           
         </Row>
       </Container>

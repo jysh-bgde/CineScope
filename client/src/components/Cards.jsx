@@ -84,7 +84,7 @@ const Cards = ({recommendations}) => {
     return (
       <Container >
        
-      {Array.from({ length: length }).map((_, idx) => (
+      {/* {Array.from({ length: length }).map((_, idx) => (
       <Row key={recommendations[idx][0]} className="my-4 " >
         <Col >
       <Card >
@@ -123,7 +123,40 @@ const Cards = ({recommendations}) => {
       </Card>
       </Col>
       </Row> 
-      ))}
+      ))} */}
+
+      {
+        recommendations.map((recommendation) =>( <Row key={recommendation._id} className="my-4 " >
+        <Col >
+      <Card >
+        <Card.Header style = {{borderBottom: '2px solid #636464'}}  >
+          {recommendation.title} 
+          <span>{userInfo ?
+        (
+          userInfo.likedMovies?.includes(recommendations._id) ?
+          (
+            <AiFillHeart color='red' onClick={(e)=>handleUnlike(e, recommendation)}/>
+
+          ) :
+         
+          
+          (  <AiOutlineHeart color='red' onClick = {(e)=>handleLike(e, recommendation)}/>)
+        )
+          : ("")}</span>
+        </Card.Header>
+      
+        <LinkContainer to = {`/movies/${recommendation._id}`} style = {{cursor: "pointer"}} state = {recommendation}>
+        <Card.Body>
+          <Card.Text>
+          {recommendation.overview}
+          </Card.Text>
+        
+        </Card.Body>
+      </LinkContainer>
+      </Card>
+      </Col>
+      </Row> ))
+      }
     </Container>
   );
   }

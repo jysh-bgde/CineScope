@@ -21,14 +21,14 @@ const HomeScreen = () => {
 
   
 
-  const submitHandler = async (e) => {
+  // const submitHandler = async (e) => {
     
-    e.preventDefault()
+  //   e.preventDefault()
   
-    const app = await client(endpoint);
-    const result = await app.predict("/predict", [movie]);
-      setReccomendations(result.data[0])
-  }
+  //   const app = await client(endpoint);
+  //   const result = await app.predict("/predict", [movie]);
+  //     setReccomendations(result.data[0])
+  // }
         
   
   
